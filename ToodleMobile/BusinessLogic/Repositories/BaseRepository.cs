@@ -1,31 +1,55 @@
 ﻿using BusinessLogic.Repositories.Interfaces;
+using MoreLinq;
 
 namespace BusinessLogic.Repositories
 {
-    public abstract class BaseRepository<T> : IRepositoryBase<T>
+    /// <summary>
+    /// Базовая реализация IRepositoryBase
+    /// </summary>
+    /// <typeparam name="T"> Шаблонный тип, для которого будет создаваться репозиторий. </typeparam>
+    public abstract class BaseRepository<T> : IRepositoryBase<T> where T : class
     {
-        ///<inheritdoc/>
-        public void AddOrUpdate(T entity)
+        /// <summary>
+        /// Контекст базы данных.
+        /// </summary>
+        public readonly DatabaseContext DatabaseContext;
+
+        public BaseRepository()
         {
-            throw new NotImplementedException();
+            DatabaseContext = DataService.DatabaseContext;
         }
 
         ///<inheritdoc/>
-        public void Delete(T entity)
+        public void AddOrUpdate(T entity)
         {
-            throw new NotImplementedException();
+            DatabaseContext.Update<T>(entity);
+            DatabaseContext.SaveChanges();
+        }
+
+        ///<inheritdoc/>
+        public void Remove(T entity)
+        {
+            DatabaseContext.Remove<T>(entity);
+            DatabaseContext.SaveChanges();
         }
 
         ///<inheritdoc/>
         public IEnumerable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return DatabaseContext.Set<T>();
         }
 
         ///<inheritdoc/>
         public T GetById(int id)
         {
-            throw new NotImplementedException();
+            return DatabaseContext.Find<T>(id)!;
+        }
+
+        ///<inheritdoc/>
+        public void AddRange(ICollection<T> values)
+        {
+            values.ForEach(value => DatabaseContext.Add<T>(value));
+            DatabaseContext.SaveChanges();
         }
     }
 }

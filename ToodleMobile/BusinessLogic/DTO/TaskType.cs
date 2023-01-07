@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessLogic.DTO
 {
+    /// <summary>
+    /// Тип задачи.
+    /// </summary>
     [Table("TaskTypes")]
     public class TaskType
     {
@@ -11,16 +14,7 @@ namespace BusinessLogic.DTO
             Title = title;
             Description = description;
             ConditionType = ConditionTypeEnum.MANUAL;
-            IsActive = true;
-        }
-
-        public TaskType(string title, string description, int? conditionValue,
-            ConditionTypeEnum conditionType)
-        {
-            Title = title;
-            Description = description;
-            ConditionType = conditionType;
-            ConditionValue = conditionValue;
+            ActiveDaysEnum = ActiveDaysEnum.EVERYDAY;
             IsActive = true;
         }
 
@@ -34,7 +28,9 @@ namespace BusinessLogic.DTO
 
         public ConditionTypeEnum ConditionType { get; set; } 
 
-        public int? ConditionValue { get; set; }
+        public ActiveDaysEnum ActiveDaysEnum { get; set; }
+
+        public int? ConditionTargetValue { get; set; }
 
         public bool IsActive { get; set; }
 

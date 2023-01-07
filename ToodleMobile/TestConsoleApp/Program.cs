@@ -1,15 +1,22 @@
 ﻿using BusinessLogic;
+using BusinessLogic.DTO;
+using BusinessLogic.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 var dataServiceInstace = DataService.Instance;
-var dbContext = dataServiceInstace.DatabaseContext;
+var dbContext = new DatabaseContext();
 
-dbContext.TaskTypes.Add(new BusinessLogic.DTO.TaskType("Cool task1", "Cool description1"));
-dbContext.TaskTypes.Add(new BusinessLogic.DTO.TaskType("Cool task2", "Cool description2"));
-dbContext.TaskTypes.Add(new BusinessLogic.DTO.TaskType("Cool task3", "Cool description3"));
-dbContext.TaskTypes.Add(new BusinessLogic.DTO.TaskType("Cool task4", "Cool description4"));
-dbContext.TaskTypes.Add(new BusinessLogic.DTO.TaskType("Cool task5", "Cool description5"));
+var lol = dataServiceInstace.TaskTypeRepository;
 
+lol.AddOrUpdate(new TaskType("Cool task", "Cool description1"));
+lol.AddOrUpdate(new TaskType("Cool task2", "Cool description1") {
+    ActiveDaysEnum = BusinessLogic.Enums.ActiveDaysEnum.WEEKEND});
+lol.AddOrUpdate(new TaskType("Cool task3", "Cool description1")
+{
+    ActiveDaysEnum = BusinessLogic.Enums.ActiveDaysEnum.WORK_DAYS
+});
+var kek = dataServiceInstace.TaskRecordRepository;
 
-dbContext.SaveChanges();
-dbContext.TaskTypes.ForEachAsync(x => Console.WriteLine($"{x.Id} {x.Title}"));
+kek.CreateTasksOnDay();
+Console.WriteLine(Directory.GetCurrentDirectory());

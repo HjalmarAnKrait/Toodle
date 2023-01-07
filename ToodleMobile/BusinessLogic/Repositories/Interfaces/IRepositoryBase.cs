@@ -20,10 +20,16 @@
         public void AddOrUpdate(T entity);
 
         /// <summary>
+        /// Добавить диапазон значений.
+        /// </summary>
+        /// <param name="values"> значения. </param>
+        public void AddRange(ICollection<T> values);
+
+        /// <summary>
         /// Удалить сущность.
         /// </summary>
         /// <param name="entity"> Сущность. </param>
-        public void Delete(T entity);
+        public void Remove(T entity);
 
         /// <summary>
         /// Получить все сущности.

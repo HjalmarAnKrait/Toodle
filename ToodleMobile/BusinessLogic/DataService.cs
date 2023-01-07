@@ -1,4 +1,8 @@
-﻿namespace BusinessLogic
+﻿using BusinessLogic.Repositories;
+using BusinessLogic.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+
+namespace BusinessLogic
 {
     /// <summary>
     /// Сервис для работы с данными.
@@ -13,16 +17,37 @@
         /// <summary>
         /// Инстанц сервиса.
         /// </summary>
-        public static DataService Instance => _instance ?? new DataService();
+        public static DataService Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new DataService();
+                }
+                    
 
-        public readonly DatabaseContext DatabaseContext;
+                return _instance;
+            }
+        }
+
+        public static DatabaseContext DatabaseContext = new DatabaseContext();
+
+        /// <summary>
+        /// Репозиторий для работы с записями задач.
+        /// </summary>
+        public ITaskRecordRepository TaskRecordRepository { get; private set; } = new TaskRecordRepository();
+
+        /// <summary>
+        /// Репозиторий для работы с типами задач.
+        /// </summary>
+        public ITaskTypeRepository TaskTypeRepository { get; private set; } = new TaskTypeRepository();
 
         /// <summary>
         /// Конструктор класса.
         /// </summary>
         private DataService()
         {
-            DatabaseContext = new DatabaseContext();
         }
     }
 }

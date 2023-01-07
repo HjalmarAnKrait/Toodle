@@ -2,6 +2,9 @@
 
 namespace BusinessLogic.Enums
 {
+    /// <summary>
+    /// Тип условия для проставления 
+    /// </summary>
     public enum ConditionTypeEnum
     {
         [Description("Ручной режим простановки готовности.")]
