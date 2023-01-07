@@ -1,4 +1,4 @@
-﻿namespace ToodleMobile.DAL.Repositories.Interfaces
+﻿namespace BusinessLogic.Repositories.Interfaces
 {
     /// <summary>
     /// Основа для репозитория.

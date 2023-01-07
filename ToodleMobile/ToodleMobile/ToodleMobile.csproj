@@ -58,11 +58,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="DAL\DTO\" />
 	  <Folder Include="UI\Commands\" />
 	  <Folder Include="UI\Behaviors\" />
 	  <Folder Include="UI\Converters\" />
 	  <Folder Include="UI\ViewModels\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\BusinessLogic\BusinessLogic.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
-﻿using ToodleMobile.DAL.Repositories.Interfaces;
+﻿using BusinessLogic.Repositories.Interfaces;
 
-namespace ToodleMobile.DAL.Repositories
+namespace BusinessLogic.Repositories
 {
     public abstract class BaseRepository<T> : IRepositoryBase<T>
     {
